@@ -15,7 +15,10 @@
     },
 
     // tells us if it is being used on a local file system so we can append index.html to URLs
-    local : window.location.protocol == 'file:' ? 'index.html' : '',
+//     local : window.location.protocol == 'file:' ? 'index.html' : '',
+    local : (window.location != window.parent.location)
+            ? document.referrer
+            : document.location.href,
 
     // scroll to the specified element: EZQuiz.scrollTo('#lesson-3')
     // scrolling can be delayed by passing a value that evaluates to true (true; 1; '.') to the second param; delay
@@ -197,7 +200,8 @@
             'Keep studying! ' + wrong
           )+
           '<div class="center">'+
-            '<a href="./' + EZQuiz.local + '" class="button">Try Again</a>'+
+            '<a href="' + EZQuiz.local + '" class="button">Try Again</a>'+
+//             '<a href="./' + EZQuiz.local + '" class="button">Try Again</a>'+
             // '<a href="' + document.getElementById('home-link').href + '" class="button">Back to Index</a>'+
           '</div>'+
         '</div>'+
