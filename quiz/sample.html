@@ -1,0 +1,55 @@
+<html>
+<head><title>Testing...</title>
+    <link rel="stylesheet" href="resources/stylesheet.css">
+    
+</head>
+<body>
+    This is a sample quiz, adapted from <a href="https://github.com/SethClydesdale/pa-driver-tests">https://github.com/SethClydesdale/pa-driver-tests.</a>
+    To make your own, copy this file and modify the quiz elements. 
+    <div id="content">
+      <div id="exercise" class="content-block">
+        <h2 id="exercise-title" class="center">Test quiz</h2>
+        <div id="quiz-result"></div>
+        <div id="quiz-zone" class="clear"></div>
+        <div id="quiz-timer" class="center"></div>
+      </div>
+    </div>    
+    
+    <script src="https://sethclydesdale.github.io/pa-driver-tests/resources/easytimer.min.js"></script>
+    <script src="resources/ezquiz.js"></script>
+    <script src="https://sethclydesdale.github.io/pa-driver-tests/resources/javascript.min.js"></script>
+    <script>EZQuiz.generate({
+      info : 'This is a sample quiz.',
+
+      quiz : [
+        {
+          question : 'What animal says "moo"?',
+          image : 'cow.jpg',
+          imageWidth : '50%',
+          answers : [
+            '+a cow',
+            'a pig',
+            'a dog',
+            'a cat',
+            'a duck'
+          ]
+        },
+        
+        {
+          question : 'Who says "rawr"?',
+          answers : [
+            '+a lion',
+            '+a dinosaur',
+            'a turkey'
+          ]
+        },
+        
+        {
+          question : 'True or false: a lion is an herbivore.',
+          answers : [
+            '+False',
+            'True'
+          ]
+        } 
+      ]
+    });</script>
