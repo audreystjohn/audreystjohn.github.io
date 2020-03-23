@@ -55,7 +55,7 @@
 
       // create individual blocks for each question and hide them until later
       for (; i < j; i++) {
-        quiz += '<div id="quiz-q' + i + '" class="question-block" data-qid="' + (i + 1) + '" style="display:none;"><div class="quiz-multi-question">' + (typeof q[i].question != 'undefined' ? q[i].question + (q[i].image ? '<img class="quiz-image"  src="resources/images/test-images/' + q[i].image + '" alt="' + q[i].image + '"' + (q[i].imageWidth ? 'style="width:' + q[i].imageWidth + '"' : '') + '>' : '') : '<div class="text-passage' + (q[i].vertical ? ' vertical-text' : '') + '" ' + (q[i].text.replace(/<br>/g, '').length < 50 ? 'style="text-align:center;"' : '') + '>' + q[i].text + '</div>' + (q[i].helper || '')) + '</div>';
+        quiz += '<div id="quiz-q' + i + '" class="question-block" data-qid="' + (i + 1) + '" style="display:none;"><div class="quiz-multi-question">' + (typeof q[i].question != 'undefined' ? q[i].question + (q[i].image ? '<img class="quiz-image"  src="' + q[i].image + '" alt="' + q[i].image + '"' + (q[i].imageWidth ? 'style="width:' + q[i].imageWidth + '"' : '') + '>' : '') : '<div class="text-passage' + (q[i].vertical ? ' vertical-text' : '') + '" ' + (q[i].text.replace(/<br>/g, '').length < 50 ? 'style="text-align:center;"' : '') + '>' + q[i].text + '</div>' + (q[i].helper || '')) + '</div>';
 
         // ready-only questions contain text only, no answers
         if (q[i].text) {
