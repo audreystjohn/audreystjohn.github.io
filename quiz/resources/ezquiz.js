@@ -197,7 +197,7 @@
             'Keep studying! ' + wrong
           )+
           '<div class="center">'+
-            '<a href="javascript:history.go(0)" class="button">Try Again</a>'+
+//             '<a href="javascript:history.go(0)" class="button">Try Again</a>'+
 //             '<a href="./' + EZQuiz.local + '" class="button">Try Again</a>'+
             // '<a href="' + document.getElementById('home-link').href + '" class="button">Back to Index</a>'+
           '</div>'+
