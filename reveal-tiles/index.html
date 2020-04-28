@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CS@MHC - Celebrate Spring 2020!</title>
+</head>
+<body>
+    <link rel="stylesheet" href="style.css">
+    <header>
+        <h1>A Message from the MHC CS Department!<span></h1>
+        <span class="tool-tip">
+            <button aria-label="how to play" onClick="openHelpModal()">
+                <svg width="40" height="40">
+                    <circle cx="20" cy="20" r="15" stroke-width="2" fill="#000000" />
+                    <text x="50%" y="50%" text-anchor="middle" fill="white" font-size="1em" dy=".4em">❓</text>
+                    ❓
+                </svg>
+            </button>
+            <span class="tool-tip-text">Say, what?</span>
+        </span>
+    </header>
+    <main>
+            <table class="game-board">
+                <tbody class="game-grid">
+                    <tr class="game-grid-row">
+                        <td class="game-card">
+                            <img class="game-card-img" src="img/valerie1.png" alt="Valerie">
+                        </td>
+                        <td class="game-card">
+                            <img class="game-card-img" src="img/lisa1.png" alt="Lisa">
+                        </td>
+                        <td class="game-card">
+                            <img class="game-card-img" src="img/barb1.png" alt="Barb">
+                        </td>
+                        <td class="game-card">
+                            <img class="game-card-img" src="img/audrey1.png" alt="Audrey">
+                        </td>
+                        <td class="game-card">
+                            <img class="game-card-img" src="img/heather1.png" alt="Heather">
+                        </td>
+                        <td class="game-card">
+                            <img class="game-card-img" src="img/wendy1.png" alt="Wendy">
+                        </td>
+                    </tr>
+                    <tr class="game-grid-row">
+                        <td class="game-card">
+                            <img class="game-card-img" src="img/luke1.png" alt="Luke">
+                        </td>
+                        <td class="game-card">
+                            <img class="game-card-img" src="img/barbara1.png" alt="Barbara">
+                        </td>
+                        <td class="game-card">
+                            <img class="game-card-img" src="img/tayloe1.png" alt="Tayloe">
+                        </td>
+                        <td class="game-card">
+                            <img class="game-card-img" src="img/janet1.png" alt="Janet">
+                        </td>
+                        <td class="game-card">
+                            <img class="game-card-img" src="img/charlie1.png" alt="Charlie">
+                        </td>
+                        <td class="game-card">
+                            <img class="game-card-img" src="img/eitan1.png" alt="Eitan">
+                        </td>
+                    </tr>
+                    <tr class="game-grid-row">
+                        <td class="game-card">
+                            <img class="game-card-img" src="img/valerie2.png" alt="Valerie">
+                        </td>
+                        <td class="game-card">
+                            <img class="game-card-img" src="img/lisa2.png" alt="Lisa">
+                        </td>
+                        <td class="game-card">
+                            <img class="game-card-img" src="img/barb2.png" alt="Barb">
+                        </td>
+                        <td class="game-card">
+                            <img class="game-card-img" src="img/audrey2.png" alt="Audrey">
+                        </td>
+                        <td class="game-card">
+                            <img class="game-card-img" src="img/heather2.png" alt="Heather">
+                        </td>
+                        <td class="game-card">
+                            <img class="game-card-img" src="img/wendy2.png" alt="Wendy">
+                        </td>
+                    </tr>
+                    <tr class="game-grid-row">
+                        <td class="game-card">
+                            <img class="game-card-img" src="img/luke2.png" alt="Luke">
+                        </td>
+                        <td class="game-card">
+                            <img class="game-card-img" src="img/barbara2.png" alt="Barbara">
+                        </td>
+                        <td class="game-card">
+                            <img class="game-card-img" src="img/tayloe2.png" alt="Tayloe">
+                        </td>
+                        <td class="game-card">
+                            <img class="game-card-img" src="img/janet2.png" alt="Janet">
+                        </td>
+                        <td class="game-card">
+                            <img class="game-card-img" src="img/charlie2.png" alt="Charlie">
+                        </td>
+                        <td class="game-card">
+                            <img class="game-card-img" src="img/eitan2.png" alt="Eitan">
+                        </td>
+                    </tr>
+
+                </tbody>               
+            </table>
+            <div class="restart-button-div">
+                <button class="restart-button brown-button" id="restartButton" onClick="startGame()">Reset ↻</button>
+            </div>
+
+        <!-- Modal to display Game Instructions -->
+        <div class="modal" id="helpModal">
+            <div class="modal-content">
+                <span aria-label="close" role="button" class="close" onClick="closeHelpModal()">&times;</span>
+                <div class="modal-header">
+                    <h2>What is this?</h2>
+                </div>
+                <div class="modal-body">
+                    <div class="help-tips">
+                        <p>This is our way of letting you know how much we miss you! Click the squares to
+                            reveal our message...</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="brown-button" onClick="closeHelpModal()">Close</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="page-footer">
+            <p>Adapted from the projects of
+                <a href="https://medium.com/@adamichelllle/building-a-memory-matching-game-in-javascript-48e792c7b563" class="page-footer-link">Michelle Aniuchi</a> and 
+                <a href="https://github.com/sandraisrael/Memory-Game-fend" class="page-footer-link">Sandra Israel-Ovirih</a>.
+            </p>
+        </div>
+    </footer>
+    <script src="main.js"></script>
+    <noscript>Oops!!! Sorry, you cannot interact with this. Your broswer does not support Javascript.</noscript>
+</body>
+</html>
