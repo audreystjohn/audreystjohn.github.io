@@ -1,6 +1,6 @@
 /** UPDATE THIS WITH PROMPTS **/
 /** You can use audreystjohn.github.io/discomfort-prompts/toArray.html **/
-var prompts = ["Attend a hackathon","Derive a math equation","Introduce myself to a new group","Write an email to my advisor","Raise my hand if I’m confused","Cook a meal","Paint a mural","Play the ukelele","Form a group in class","Answer a question in class","Work through a problem in front of class on the whiteboard","Create a web site","Give a 2-minute monologue on a stage","Pitch at a “Shark Tank” event","Talk to a project partner about something that bothers me","Request help from an instructor","Make an appointment for office hours","Speak up if a social dynamic is not working for me"];
+var prompts = ["Attend a hackathon.","Derive a math equation.","Introduce myself to a new group.","Write an email to my advisor.","Raise my hand if I’m confused.","Cook a meal.","Paint a mural.","Play the ukelele.","Form a group in class.","Answer a question in class.","Work through a problem in front of class on the whiteboard.","Create a web site.","Give a 2-minute monologue on a stage.","Pitch at a “Shark Tank” event.","Talk to a project partner about something that bothers me.","Request help from an instructor.","Make an appointment for office hours.","Speak up if a social dynamic is not working for me."];
 
 //SELECT ELEMENTS AND ASSIGN THEM TO VARS
 var inComfortBtn = document.querySelector('#inComfort');
