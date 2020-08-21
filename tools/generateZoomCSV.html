@@ -1,0 +1,78 @@
+<html>
+<head>
+    <title>Zoom CSV generator</title> 
+</head>
+<body>
+
+
+Enter the participant email addresses here, separated by commas or on different lines. If someone may sign on from more than one account, you can group them with curly braces and semicolons between their email addresses. <br/>
+
+For example, you might have:
+<br/><br/>
+jorge@mhc.edu,marylyon@mhc.edu=mary.lyon@alternative.com=mlyon@otherplace.com
+<p>
+<textarea id="inputEmails" style="width:300px; height:120px;"></textarea><br/>
+Number of rooms: <input id="numRooms"/><br/>
+<button onclick="toCSV()">Generate and download CSV</button>
+</p>
+
+<div id="roomsOutput"></div>
+
+<script type="text/javascript">
+
+    function toCSV( ) {
+        var textAreaElement = document.getElementById('inputEmails');
+        var participants = textAreaElement.value.trim().split(new RegExp('\n|,', 'g'));
+        console.log( "Input: " + participants );
+        var numParticipants = participants.length;
+        var shuffledParticipants = participants
+          .map((a) => ({sort: Math.random(), value: a}))
+          .sort((a, b) => a.sort - b.sort)
+          .map((a) => a.value)
+        console.log( "Shuffled: " + shuffledParticipants );
+        
+        var numRoomsElement = document.getElementById('numRooms');
+        var numRooms = parseInt(numRoomsElement.value.trim());
+        if ( isNaN(numRooms) || numRooms < 0 )
+          numRooms = 1;
+        console.log( "Entered: " + numRooms + " rooms.")
+        
+        var roomAssignments = new Array( numRooms );
+        var minNumParticipantsPerRoom = numParticipants/numRooms;
+        var additionalParticipants = numParticipants % numRooms;
+        var nextIndex = 0; 
+        var endRange;
+        for (var i = 0; i < roomAssignments.length; i++ )
+        { 
+          numForRoom = i < additionalParticipants ? minNumParticipantsPerRoom + 1: minNumParticipantsPerRoom;
+
+          roomAssignments[i] = 
+            shuffledParticipants.slice(nextIndex,nextIndex + numForRoom).join().split('=').join(',').split(',');
+          nextIndex += numForRoom;
+        }
+        
+        console.log( roomAssignments );  
+        
+        output = "Pre-assign Room Name,Email Address";
+        for (var i = 0; i < roomAssignments.length; i++ )
+          for (var j = 0; j < roomAssignments[i].length; j++ )
+            output += "\nRoom " + (i+1).toString() + "," + roomAssignments[i][j];
+        document.getElementById('roomsOutput').innerText = output;
+  
+        // Start file download.
+        download("breakoutrooms.csv",output);
+    }
+    
+    function download(filename, text) {
+      var element = document.createElement('a');
+      element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+      element.setAttribute('download', filename);
+
+      element.style.display = 'none';
+      document.body.appendChild(element);
+
+      element.click();
+
+      document.body.removeChild(element);
+    }
+</script>
