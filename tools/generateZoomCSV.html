@@ -4,12 +4,22 @@
 </head>
 <body>
 
+<h1>Randomly generate zoom breakout rooms</h1>
+Instructions:
+<ol>
+  <li>
+Enter your participant email addresses in the text area, separated by commas or on different lines. 
+<ul><li>If someone has multiple email addresses associated to them, <br/>use an equals sign (=) to associate them to one participant. </ul>
 
-Enter the participant email addresses here, separated by commas or on different lines. If someone may sign on from more than one account, you can group them with curly braces and semicolons between their email addresses. <br/>
+Here's an example input with two participants (Mary Lyon has 3 emails associated her):
+<br/>
+<em>jorge@mhc.edu,marylyon@mhc.edu=mary.lyon@alternative.com=mlyon@otherplace.com
+</em>
 
-For example, you might have:
-<br/><br/>
-jorge@mhc.edu,marylyon@mhc.edu=mary.lyon@alternative.com=mlyon@otherplace.com
+<li>Enter the number of rooms you want to randomly distribute participants into.
+<li>Click the <strong>Generate and download CSV</strong> button. <br/>
+  This will download a file named <em>breakoutrooms.csv</em> and show the results below.
+</ol>
 <p>
 <textarea id="inputEmails" style="width:300px; height:120px;"></textarea><br/>
 Number of rooms: <input id="numRooms"/><br/>
