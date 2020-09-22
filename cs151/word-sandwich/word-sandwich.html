@@ -1,0 +1,22 @@
+<html>
+  <head>
+    <title>Word Sandwich!</title>
+  </head>
+  <body>
+    <h2>Try out this simple version of Word Sandwich!</h2>
+
+    <div id="status">Play the game...</div>
+    <br/>
+    <div id="topBread">----</div>
+    <div id="middle">----</div>
+    <div id="bottomBread">----</div>
+
+    <p>
+      Enter a 5-letter word: <input id="userGuess" onkeydown="keypressed(this)" /><br/>
+      <button id="goBtn" onclick="enterWord()">Go!</button>
+    </p>
+
+    <script src="word-sandwich.js"></script>
+  
+  </body>
+</html>
