@@ -5,6 +5,10 @@
   <body>
     <h2>Try out this simple version of Word Sandwich!</h2>
 
+    Welcome to word sandwich! Try to guess the secret word by entering 5-letter words.
+    As you guess, your words will form a sandwich to help guide you. The secret word will
+    be sandwiched between the top and bottom bread!
+    <br/><br/>
     <div id="status">Play the game...</div>
     <br/>
     <div id="topBread">----</div>
@@ -12,7 +16,8 @@
     <div id="bottomBread">----</div>
 
     <p>
-      Enter a 5-letter word: <input id="userGuess" onkeydown="keypressed(this)" /><br/>
+      Enter a 5-letter word or q to quit: <br/>
+      <input id="userGuess" /><br/>
       <button id="goBtn" onclick="enterWord()">Go!</button>
     </p>
 
