@@ -1,0 +1,34 @@
+
+<html>
+  <head>
+    <title>Wordle</title>
+  </head>
+  <body>
+    <h2>Try out this simple version of Wordle!</h2>
+
+    You have 6 attempts to guess the secret word by entering 5-letter words.
+    As you guess, you'll receive a clue under each letter. <br/><br/>
+    ♥ Correct letter in the correct spot<br/>
+    ♡ Correct letter in the incorrect spot<br/>
+    <b>_</b> Incorrect letter (not in the secret word)<br/><br/>
+
+
+   If you enter something that is not a valid 5-letter word, your guess will
+   be rejected (you'll see ".....").
+    <br/><br/>
+    Good luck!
+    <br/><br/>
+
+    <p>
+      Enter your 5-letter guess: <br/>
+      <input id="userGuess" /><br/>
+      <button id="goBtn" onclick="enterWord()">Go!</button>
+    </p>
+    <br/>
+    <textarea id="gameZone" rows=20 cols= 50></textarea>
+
+
+    <script src="wordle.js"></script>
+  
+  </body>
+</html>
