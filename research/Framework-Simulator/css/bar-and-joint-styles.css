@@ -1,0 +1,41 @@
+canvas {
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    display: float;
+    width: 800px;
+}
+
+body {
+  /* background-image: url('imgs/moroccan-flower.png'); */
+  /* background-repeat: no-repeat; */
+  /* background-size: 00px; */
+}
+
+.tooltip {
+  display: inline-flex; 
+  text-decoration: none;
+  position: relative;
+  padding: 5px 5px;
+}
+
+div.tooltip .tooltip-content {
+  display: none;
+  color: white;
+  background-color: rgba( 100,100,100,.8);
+  z-index: 1000;
+  text-align: center;
+  padding: 5px 5px;
+  border-radius: 6px;
+}
+
+div.tooltip:hover .tooltip-content {
+  display: inline-flex; 
+  position: fixed;
+  overflow: hidden;
+}
+
+span.hidden {
+  display: inline-flex; 
+}

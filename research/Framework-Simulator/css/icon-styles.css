@@ -1,0 +1,235 @@
+/** Icons from https://css.gg/app **/
+
+/*********************************** pin mode ********************************/
+.gg-pin-alt {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    width: 2px;
+    height: 8px;
+    border-radius: 3px;
+    transform: scale(var(--ggs,1));
+    background: currentColor
+   }
+   
+   .gg-pin-alt::after {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border: 6px double;
+    border-radius: 100px;
+    top: -10px;
+    left: -5px
+   } 
+/*********************************** move mode ********************************/
+.gg-move {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: rotate( -0.08turn) scale(var(--ggs,1));
+    width: 10px;
+    height: 8px;
+   }
+   
+   .gg-move::after,
+   .gg-move::before {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute
+   }
+   
+   .gg-move::before {
+    background: currentColor;
+    left: 6px;
+    bottom: 0;
+    width: 2px;
+    height: 8px
+   }
+   
+   .gg-move::after {
+    width: 0;
+    height: 0;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-bottom: 10px solid;
+    top: -7px
+   } 
+/*********************************** deletion mode ********************************/
+.gg-erase {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: scale(var(--ggs,1));
+    width: 22px;
+    height: 18px
+   }
+   
+   .gg-erase::after,
+   .gg-erase::before {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute
+   }
+   
+   .gg-erase::before {
+    width: 6px;
+    height: 14px;
+    border-bottom:
+    4px solid transparent;
+    border-radius: 1px;
+    box-shadow:
+    0 0 0 2px,
+    inset 0 -2px 0 0;
+    left: 7px;
+    top: 2px;
+    transform: rotate(45deg)
+   }
+   
+   .gg-erase::after {
+    background: currentColor;
+    width: 22px;
+    height: 2px;
+    bottom: 0;
+    border-radius: 20px
+   } 
+
+/*********************************** clear mode ********************************/
+.gg-trash {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: scale(var(--ggs, 1));
+    width: 10px;
+    height: 12px;
+    border: 2px solid transparent;
+    box-shadow:
+        0 0 0 2px,
+        inset -2px 0 0,
+        inset 2px 0 0;
+    border-bottom-left-radius: 1px;
+    border-bottom-right-radius: 1px;
+    margin-top: 4px
+}
+
+.gg-trash::after,
+.gg-trash::before {
+    content: "";
+    /* display: block; */
+    box-sizing: border-box;
+    position: absolute
+}
+
+.gg-trash::after {
+    border-radius: 3px;
+    width: 16px;
+    height: 2px;
+    top: -4px;
+    left: -5px
+}
+
+.gg-trash::before {
+    width: 10px;
+    height: 4px;
+    border: 2px solid;
+    border-bottom: transparent;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    top: -7px;
+    left: -2px
+}
+
+/*********************************** connection mode ********************************/
+.gg-attribution {
+    display: block;
+    box-sizing: border-box;
+    transform: scale(var(--ggs,1));
+    width: 16px;
+    height: 18px;
+    background:
+    linear-gradient(
+    to left,
+    currentColor 14px,
+    transparent 0
+    ) no-repeat 1px 2px/8px 2px,
+    linear-gradient(
+    to left,
+    currentColor 14px,
+    transparent 0
+    ) no-repeat 6px 14px/6px 2px,
+    radial-gradient(
+    circle,
+    currentColor 60%,
+    transparent 40%
+    ) no-repeat 10px 12px/6px 6px,
+    radial-gradient(
+    circle,
+    currentColor 60%,
+    transparent 40%
+    ) no-repeat 0 0/6px 6px
+   }
+   
+   .gg-attribution::after,
+   .gg-attribution::before {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border: 2px solid
+   }
+   
+   .gg-attribution::before {
+    border-right: 0;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    top: 8px;
+    left: 2px
+   }
+   
+   .gg-attribution::after {
+    border-left: 0;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    right: 2px;
+    top: 2px
+   } 
+
+/*********************************** undo mode ********************************/
+   .gg-undo {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: scale(var(--ggs,1));
+    width: 14px;
+    height: 14px;
+    border: 2px solid;
+    border-left-color: transparent;
+    border-radius: 100px
+   }
+   
+   .gg-undo::before {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-top: 2px solid;
+    border-left: 2px solid;
+    top: -3px;
+    left: -1px;
+    transform: rotate(-68deg)
+   }    
+/*********************************** ? mode ********************************/
+
+
+/********** NEEDS TO BE AFTER ALL THE ICONS TO MAKE THEM APPEAR SIDE BY SIDE ***********/
+[class^="gg-"] {
+    display: inline-flex; 
+ }

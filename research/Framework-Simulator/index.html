@@ -9,33 +9,69 @@
     <script src="js/custom-render.js"></script>
     <script src="js/bar-and-jointIO.js"></script>
     <script src="js/bar-and-jointUI.js"></script>
+    <script src="js/bar-and-joint-simulator.js"></script>
+
     <title>Bar-and-joint simulator</title>
 
-    <link rel="stylesheet" href="bar-and-joint-styles.css">
+    <link rel="stylesheet" href="css/bar-and-joint-styles.css">
+    <link rel="stylesheet" href="css/icon-styles.css">
   </head>
   <body>
 
-    <canvas id = "matterJS-canvas"></canvas>
-    <script src="js/bar-and-joint-simulator.js"></script>
+    <h1>Bar-and-joint motion simulator</h1>
+    <div class="tooltip">
+      <a onclick="clickIcon(this)"><i class="gg-move" id="moveIcon"></i></a>
+      <span class="tooltip-content hidden">Move mode</span>
+    </div>
+    <div class="tooltip">
+      <a onclick="clickIcon(this)"><i class="gg-pin-alt" id="pinIcon"></i></a>
+      <span class="tooltip-content hidden">Pin mode</span>
+    </div>
+    <div class="tooltip">
+      <a onclick="clickIcon(this)"><i class="gg-attribution" id="connectIcon"></i></a>
+      <span class="tooltip-content hidden">Connect mode</span>
+    </div>
+    <div class="tooltip">
+      <a onclick="clickIcon(this)"><i class="gg-erase" id="deleteIcon"></i></a>
+      <span class="tooltip-content hidden">Erase mode</span>
+    </div>
+    <!-- <div class="tooltip">
+      <a onclick="clickIcon(this)"><i class="gg-trash" id="clearIcon"></i></a>
+      <span class="tooltip-content hidden">Clear all</span>
+    </div> -->
+    
+    &nbsp;&nbsp;&nbsp;Current Mode: <i><span id="modeLabel">drag</span></i>
+      <!-- <span>Read more</span>  -->
+    <br/>
 
+    <canvas id = "matterJS-canvas" height="800" width="600"></canvas>
+    <script>
+    setup();
+    loadTriangle();
+    loadFourBar( false );
+    </script>
+    
     <h2>User guide</h2>
+    <ul>
+      <li>Use the tools at the top to move, (un)pin, connect or delete vertices. </li>
+      <li>In <i>connect</i> mode, click to (un)select first vertex; click the second vertex to connect.</li>
+      <li>Click on blank space to add a new vertex. </li>
+      <li><label>Load JSON: <input type="file" onchange="loadFile()"/></label>
+      <li>Keyboard shortcuts for temporary mode:
+    <!-- Use the clear tool to remove the framework. -->
         <ul>
-          <li>Hold the "p" key down while clicking a vertex to <b>pin</b> it; do the same to unpin.</li>
-          <li>Hold the "d" key down while clicking a vertex to <b>delete</b> it.</li>
-          <li>Add a new vertex by clicking in blank space.</li>
-          <li>Add a <b>bar</b> by:
-            <ol>
-              <li>Hold SHIFT key while clicking the first vertex; do the same to unselect.</li>
-              <li>Hold SHIFT key while clicking a second vertex to add the constraint.</li>
-            </ol>
-          <li>    <label>Load a JSON file: <input type="file" onchange="loadFile()"/></label>
-          </li>
+          <li><i>p</i> to <b>pin</b></li>
+          <li><i>d</i> to <b>delete</b></li>
+          <li><i>SHIFT</i> to <b>connect</b></li>
         </ul>
+      </li>
+    </ul>
 
     <br />
     <br/><br/>
     <hr/>
-    <small><i>Background image: <a href="https://www.toptal.com/designers/subtlepatterns/moroccan-flower-pattern/">moroccan-flower-pattern</a>.</i></small>
+    <i>Physics engine: <a href="http://brm.io/matter-js/">Matter.js</a></i>
+    <!-- <small><i>Background image: <a href="https://www.toptal.com/designers/subtlepatterns/moroccan-flower-pattern/">moroccan-flower-pattern</a>.</i></small> -->
 
   </body>
 </html>
