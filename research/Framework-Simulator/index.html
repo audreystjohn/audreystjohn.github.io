@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<html lang="en">
+  <head>
+    <!-- <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script> -->
+
+    <script src="js/matter.min.js"></script>
+    <script src="js/custom-render.js"></script>
+    <script src="js/bar-and-jointIO.js"></script>
+    <script src="js/bar-and-jointUI.js"></script>
+    <title>Bar-and-joint simulator</title>
+
+    <link rel="stylesheet" href="bar-and-joint-styles.css">
+  </head>
+  <body>
+
+    <canvas id = "matterJS-canvas"></canvas>
+    <script src="bar-and-joint-simulator.js"></script>
+
+    <h2>User guide</h2>
+        <ul>
+          <li>Hold the "p" key down while clicking a vertex to <b>pin</b> it; do the same to unpin.</li>
+          <li>Hold the "d" key down while clicking a vertex to <b>delete</b> it.</li>
+          <li>Add a new vertex by clicking in blank space.</li>
+          <li>Add a <b>bar</b> by:
+            <ol>
+              <li>Hold SHIFT key while clicking the first vertex; do the same to unselect.</li>
+              <li>Hold SHIFT key while clicking a second vertex to add the constraint.</li>
+            </ol>
+          <li>    <label>Load a JSON file: <input type="file" onchange="loadFile()"/></label>
+          </li>
+        </ul>
+
+    <br />
+    <br/><br/>
+    <hr/>
+    <small><i>Background image: <a href="https://www.toptal.com/designers/subtlepatterns/moroccan-flower-pattern/">moroccan-flower-pattern</a>.</i></small>
+
+  </body>
+</html>
