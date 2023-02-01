@@ -1,0 +1,3 @@
+[submodule "Framework-Simulator"]
+	path = Framework-Simulator
+	url = https://github.com/audreystjohn/Framework-Simulator.git
