@@ -47,16 +47,25 @@ function initUI()
 function setupCustomCanvasEvents()
 {
     matterCanvas.addEventListener('click', function (e) {
-        customRespondToCanvas(e);
+        customRespondToCanvas(e.offsetX, e.offsetY);
     });
     matterCanvas.addEventListener('touchstart', function (e) {
-        customRespondToCanvas(e);
+        var touch = e.touches[0];
+        // var x = touch.pageX;
+        // var y = touch.pageY;
+        // or taking offset into consideration
+        var canvas = document.getElementById( 'matterJS-canvas' );
+        var x_2 = touch.pageX - canvas.offsetLeft;//+25;
+        var y_2 = touch.pageY - canvas.offsetTop; //+25;
+        customRespondToCanvas(x_2,y_2);
     });
 }
 
-function customRespondToCanvas( e )
+function customRespondToCanvas( x, y )
 {
-    console.log( "click at " + e.offsetX + "," + e.offsetY );
+    var statusMsg = "click at " + x + "," + y;
+    console.log( statusMsg );
+    document.getElementById('statusText').textContent = "Status: " + statusMsg;
 
     // console.log( render.mouse.button  );
     // console.log( mouseConstraint.body );
@@ -65,7 +74,7 @@ function customRespondToCanvas( e )
     if ( mouseConstraint.body == null )
     {
         console.log( "add a circle here");
-        addCircle( nextID(), e.offsetX, e.offsetY );
+        addCircle( nextID(), x, y );
     }
     // otherwise, there is a circle being clicked
     else
