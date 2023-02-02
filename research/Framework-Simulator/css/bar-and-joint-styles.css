@@ -17,7 +17,7 @@ body {
   display: inline-flex; 
   text-decoration: none;
   position: relative;
-  padding: 5px 5px;
+  padding: 7px 7px;
 }
 
 div.tooltip .tooltip-content {
@@ -38,4 +38,9 @@ div.tooltip:hover .tooltip-content {
 
 span.hidden {
   display: inline-flex; 
+}
+
+
+.no-pad {
+  padding: 0px 0px;
 }

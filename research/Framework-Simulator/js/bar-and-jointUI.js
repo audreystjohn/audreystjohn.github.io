@@ -3,6 +3,7 @@ var pressedKeys = new Array();
 var PINNING_KEY = "p";
 var DELETION_KEY = "d";
 var CONNECTION_KEY = "shift";
+var ADDITION_KEY = "a";
 var SELECTED_STROKE_COLOR = "orange";
 
 var DEFAULT_ICON_COLOR = "gray";
@@ -13,7 +14,8 @@ var MOVE_MODE = "move";
 var CONNECT_MODE = "connect";
 var CLEAR_MODE = "clear";
 var DELETE_MODE = "delete";
-var MODES = [MOVE_MODE,PIN_MODE,CONNECT_MODE,DELETE_MODE];// ,CLEAR_MODE];
+var ADD_MODE = "add";
+var MODES = [MOVE_MODE,PIN_MODE,CONNECT_MODE,ADD_MODE,DELETE_MODE];// ,CLEAR_MODE];
 
 var selectedCircle = null;
 var currentMode;
@@ -70,11 +72,11 @@ function customRespondToCanvas( x, y )
     // console.log( render.mouse.button  );
     // console.log( mouseConstraint.body );
 
-    // if not over a circle, add one
-    if ( mouseConstraint.body == null )
+    // if in ADD_MODE, add one
+    if ( currentMode === ADD_MODE )
     {
         console.log( "add a circle here");
-        // addCircle( nextID(), x, y );
+        addCircle( nextID(), x, y );
     }
     // otherwise, there is a circle being clicked
     else
@@ -138,7 +140,9 @@ function processKeyPress(e)
         setMode( DELETE_MODE );
     else if ( keyVal === CONNECTION_KEY )
         setMode( CONNECT_MODE );
-
+    else if ( keyVal === ADDITION_KEY )
+        setMode( ADD_MODE );
+    
     if ( !pressedKeys.includes( keyVal ) )
         pressedKeys.push( keyVal );
     // console.log( pressedKeys );
