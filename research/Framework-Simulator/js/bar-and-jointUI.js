@@ -16,7 +16,8 @@ var CONNECT_MODE = "connect";
 var CLEAR_MODE = "clear";
 var DELETE_MODE = "delete";
 var ADD_MODE = "add";
-var MODES = [MOVE_MODE,PIN_MODE,CONNECT_MODE,ADD_MODE,DELETE_MODE];// ,CLEAR_MODE];
+var MODES = [MOVE_MODE,PIN_MODE,CONNECT_MODE,ADD_MODE,DELETE_MODE];
+var DEFAULT_MODE = MOVE_MODE;
 
 var selectedCircle = null;
 var currentMode;
@@ -42,9 +43,11 @@ function initUI()
 
     setupIconElts();
 
-    currentMode = MODES[0];
+    currentMode = DEFAULT_MODE;
 
     setMode( currentMode );
+
+    setupBuiltIns();
 }
 
 function setupCustomCanvasEvents()
@@ -54,27 +57,18 @@ function setupCustomCanvasEvents()
     });
     matterCanvas.addEventListener('touchstart', function (e) {
         var touch = e.touches[0];
-        // var x = touch.pageX;
-        // var y = touch.pageY;
-        // or taking offset into consideration
         var canvas = document.getElementById( 'matterJS-canvas' );
-        var x_2 = touch.pageX - canvas.offsetLeft;//+25;
-        var y_2 = touch.pageY - canvas.offsetTop; //+25;
-        customRespondToCanvas(x_2,y_2);
+        var x = touch.pageX - canvas.offsetLeft;
+        var y = touch.pageY - canvas.offsetTop;
+        customRespondToCanvas(x,y);
     });
 }
 
 function customRespondToCanvas( x, y )
 {
-    // console.log( render.mouse.button  );
-    // console.log( mouseConstraint.body );
-
     var bodiesUnder  = Query.point( Composite.allBodies(barAndJointComposite), { x: x, y: y});
 
-    // var statusMsg = "body under (" + x + "," + y + "): " + bodiesUnder[0].graphID;
-    // console.log( statusMsg );
-    
-    // document.getElementById('statusText').textContent = "Status: " + statusMsg;
+    // console.log( "body under (" + x + "," + y + "): " + bodiesUnder[0].graphID );
 
     // if in ADD_MODE, add one
     if ( currentMode === ADD_MODE )
@@ -89,21 +83,18 @@ function customRespondToCanvas( x, y )
         var clickedCircle = bodiesUnder[0];
 
         // if we're pinning it
-        // if ( pressedKeys.includes( PINNING_KEY ) )
         if ( currentMode === PIN_MODE )
         {
             // console.log( "pin it" );
             togglePinning( clickedCircle );
         }
         // otherwise, if we're selecting it
-        // else if (e.shiftKey)
         else if ( currentMode === CONNECT_MODE )
         {
             // console.log('shift down');
             toggleSelection( clickedCircle );
         }
         // otherwise, if we're deleting it
-        // else if ( pressedKeys.includes( DELETION_KEY ) )
         else if ( currentMode === DELETE_MODE )
         {
             // console.log('shift down');
@@ -251,8 +242,46 @@ function setupIconElts()
 
 function clickIcon(anchor) {
     var clickedIconId = anchor.querySelector("i").id;
-    // console.log( "clicked on " + clickedIconId );
 
     // id has "Icon" at the end, so strip off last 4 characters
     setMode( clickedIconId.substring( 0, clickedIconId.length - 4 ) );
 }
+
+function clearFramework() {
+    clearBarAndJoint();
+    setMode( DEFAULT_MODE );
+}
+
+function outputFramework() {
+    var jsonString = frameworkToJSON();
+    document.getElementById('jsonArea').textContent = jsonString;
+    console.log( jsonString );
+}
+
+function inputFramework() {
+    jsonText = document.getElementById('jsonArea').textContent;
+    console.log( jsonText );
+
+    if ( jsonText === "" )
+        clearFramework();
+    else
+        addBarAndJointToWorldFromJSON( jsonText );
+}
+
+function loadFile() {
+    console.log( "in loadFile" );
+      const content = document.querySelector('.content');
+      const [file] = document.querySelector('input[type=file]').files;
+      const reader = new FileReader();
+  
+      reader.addEventListener("load", () => {
+          // this will then display a text file
+          console.log(reader.result);
+            document.getElementById('jsonArea').textContent = reader.result;
+        //   addBarAndJointToWorldFromJSON( reader.result );
+      }, false);
+  
+      if (file) {
+        reader.readAsText(file);
+      }
+  } 

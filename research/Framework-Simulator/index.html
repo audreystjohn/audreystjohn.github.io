@@ -8,6 +8,7 @@
     <script src="js/matter.min.js"></script>
     <script src="js/custom-render.js"></script>
     <script src="js/bar-and-jointIO.js"></script>
+    <script src="js/built-in-frameworks.js"></script>
     <script src="js/bar-and-jointUI.js"></script>
     <script src="js/bar-and-joint-simulator.js"></script>
 
@@ -39,14 +40,25 @@
       <a onclick="clickIcon(this)"><i class="gg-erase" id="deleteIcon"></i></a>
       <span class="tooltip-content hidden">Erase mode</span>
     </div>
-    <!-- <div class="tooltip">
-      <a onclick="clickIcon(this)"><i class="gg-trash" id="clearIcon"></i></a>
-      <span class="tooltip-content hidden">Clear all</span>
-    </div> -->
+    <div class="tooltip no-pad">
+      <a onclick="outputFramework()"><i class="gg-arrow-down-r" id="saveIcon"></i></a>
+      <span class="tooltip-content hidden">Save</span>
+    </div>
+    <div class="tooltip">
+      <a onclick="clearFramework()"><i class="gg-trash" id="clearIcon"></i></a>
+      <span class="tooltip-content hidden">Clear framework</span>
+    </div>
     </span>
     <span style="color:green">
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Current mode: <i><span id="modeLabel">drag</span></i></span>
-      <!-- <span>Read more</span>  -->
+    <!-- <span>Read more</span>  -->
+    
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <label>
+      <select id="Frameworks" name="Frameworks"></select>
+      <button id="btn" onclick="loadBuiltIn()"> Load</button>
+    </label>
+
     <br/>
     <!-- <span id="statusText">Status: </span>
     <br/> -->
@@ -63,9 +75,9 @@
       <li>Use the tools at the top to move, (un)pin, connect, add or delete vertices. </li>
       <li>In <i>connect</i> mode, click to (un)select first vertex; click the second vertex to connect.</li>
       <li>Click on blank space to add a new vertex. </li>
-      <li><label>Load JSON: <input type="file" onchange="loadFile()"/></label>
+      <li>Use the save tool to print a JSON string of the framework (output below).</li>
+      <li>Use the clear tool to remove the framework.</li>
       <li>Keyboard shortcuts for temporary mode:
-    <!-- Use the clear tool to remove the framework. -->
         <ul>
           <li><i>p</i> to <b>pin</b></li>
           <li><i>a</i> to <b>add</b></li>
@@ -75,7 +87,14 @@
       </li>
     </ul>
 
-    <br />
+    <label><h3>JSON input/output </h3>
+      <i>or
+      <input type="file" onchange="loadFile()"/></i><br/>
+      <textarea id="jsonArea" cols="60" rows="5" style="overflow:auto;"></textarea><br/>
+      <button id="btn" onclick="inputFramework()"> Load</button>
+    </label>
+
+
     <br/><br/>
     <hr/>
     <i>Physics engine: <a href="http://brm.io/matter-js/">Matter.js</a></i>

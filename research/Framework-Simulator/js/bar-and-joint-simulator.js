@@ -198,18 +198,46 @@ function deleteCircle( circleBody )
 
 function nextID()
 {
-    // assume we started labeling vertices with "a" or "1"
-    // next value will be 1 more than current number of elements
-    currentNumberOfJoints = idToCircleMap.size;
+    var graphIDs = Array.from( idToCircleMap.keys() );
+    var maxLabel = maxValue( graphIDs );
 
-    var firstLabel = idToCircleMap.entries().next().value[0];
-    console.log( "firstLabel: " + firstLabel );
     // check if we are using numbers 
-    if (  /^\d+$/.test(firstLabel) )
-        return (currentNumberOfJoints + 1).toString();
+    if (  /^\d+$/.test(maxLabel) )
+        return (Number(maxLabel) + 1).toString();
     else 
-        // TO DO - figure out biggest label and update if we go past Z
-        return nextLetterInAlphabet( firstLabel );
+    {
+        var lastChar = maxLabel.charAt( maxLabel.length - 1 );
+        console.log( "lastChar: " + lastChar );
+        if ( lastChar.toLowerCase() === "z" )
+        {
+            if (maxLabel.length == 1)
+                return "aa";
+            else
+            {
+                var secondToLastChar = maxLabel.charAt( maxLabel.length - 2 );                 
+                return maxLabel.substring( 0, maxLabel.length - 2 ) + nextLetterInAlphabet( secondToLastChar ) + "a";
+            }
+        }
+        else
+        {
+            console.log( "in other else: " + lastChar );
+            return maxLabel.substring( 0, maxLabel.length - 1 ) + nextLetterInAlphabet( lastChar );
+        }
+    }
+}
+
+function maxValue( arr )
+{
+    if ( arr.length == 0 )
+        return null;
+    else
+    {
+        var maxID = arr[0];
+        for ( var i = 0; i < arr.length; i++ )
+            if ( arr[i] > maxID || arr[i].length > maxID.length )
+                maxID = arr[i];
+        return maxID;
+    }
 }
 
 function nextLetterInAlphabet(letter) {
@@ -221,19 +249,3 @@ function nextLetterInAlphabet(letter) {
       return String.fromCharCode(letter.charCodeAt(0) + 1);
     }
   }
-
-
-
-/******* BUILT IN FRAMEWORKS  **********/
-
-function loadTriangle( clearWorld = true )
-{
-    var triangleJSON = '{ "nodes": [ { "data": { "id": "1", "x": "100", "y": "100" } }, { "data": { "id": "2", "x": "200", "y": "100" } }, { "data": { "id": "3", "x": "150", "y": "150" } } ], "edges": [ {   "data": { "source": "1", "target": "2"   } }, {   "data": { "source": "2", "target": "3"   } }, {   "data": { "source": "3", "target": "1"   } }] }';
-    addBarAndJointToWorldFromJSON( triangleJSON );
-}
-
-function loadFourBar( clearWorld = true )
-{
-    var fourbarJSON = '{"nodes": [{   "data": {  "id": "a",  "x": "400",  "y": "100"   }},{   "data": {  "id": "b",  "x": "500",  "y": "100"   }},{   "data": {  "id": "c",  "x": "550",  "y": "150"   }},{   "data": {  "id": "d",  "x": "500",  "y": "150"   }}],"edges": [{  "data": {"source": "a","target": "b"  }},{  "data": {"source": "b","target": "c"  }},{  "data": {"source": "c","target": "d"  }},{  "data": {"source": "d","target": "a"  }}] }';
-    addBarAndJointToWorldFromJSON( fourbarJSON, clearWorld );
-}
