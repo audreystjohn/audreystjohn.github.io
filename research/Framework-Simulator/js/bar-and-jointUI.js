@@ -65,15 +65,15 @@ function setupCustomCanvasEvents()
 
 function customRespondToCanvas( x, y )
 {
-    var statusMsg = "click at " + x + "," + y;
-    console.log( statusMsg );
-    document.getElementById('statusText').textContent = "Status: " + statusMsg;
-
     // console.log( render.mouse.button  );
     // console.log( mouseConstraint.body );
 
     var bodiesUnder  = Query.point( Composite.allBodies(barAndJointComposite), { x: x, y: y});
-    console.log( bodiesUnder );
+
+    var statusMsg = "body under (" + x + "," + y + "): " + bodiesUnder[0].graphID;
+    console.log( statusMsg );
+    
+    document.getElementById('statusText').textContent = "Status: " + statusMsg;
 
     // if in ADD_MODE, add one
     if ( currentMode === ADD_MODE )
@@ -114,7 +114,7 @@ function customRespondToCanvas( x, y )
 /** This helps with dragging and with convenience of knowing if mouse is interacting with matter bodies */
 function setupMouseConstraint()
 {
-    mouseConstraint = MouseConstraint.create(engine, {
+    mouseConstraint = CustomMouseConstraint.create(engine, {
             mouse: mouse,
             constraint: {
                 // allow bodies on mouse to rotate
