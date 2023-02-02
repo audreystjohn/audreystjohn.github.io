@@ -31,8 +31,8 @@ function initUI()
     // and lets us check if the mouse is on top of a body
     setupMouseConstraint();
 
-    // this will be querying HTML mouse click event
-    setupMouseClick();
+    // this will be querying HTML mouse click/touch events
+    setupCustomCanvasEvents();
 
     // this will be for checking the key that is held down
     setupKeyPressing();
@@ -44,48 +44,56 @@ function initUI()
     setMode( currentMode );
 }
 
-function setupMouseClick()
+function setupCustomCanvasEvents()
 {
     matterCanvas.addEventListener('click', function (e) {
-        console.log( "click at " + e.offsetX + "," + e.offsetY );
-
-        // console.log( render.mouse.button  );
-        // console.log( mouseConstraint.body );
-
-        // if not over a circle, add one
-        if ( mouseConstraint.body == null )
-        {
-            console.log( "add a circle here");
-            addCircle( nextID(), e.offsetX, e.offsetY );
-        }
-        // otherwise, there is a circle being clicked
-        else
-        {
-            clickedCircle = mouseConstraint.body;
-
-            // if we're pinning it
-            // if ( pressedKeys.includes( PINNING_KEY ) )
-            if ( currentMode === PIN_MODE )
-            {
-                console.log( "pin it" );
-                togglePinning( clickedCircle );
-            }
-            // otherwise, if we're selecting it
-            // else if (e.shiftKey)
-            else if ( currentMode === CONNECT_MODE )
-            {
-                console.log('shift down');
-                toggleSelection( clickedCircle );
-            }
-            // otherwise, if we're deleting it
-            // else if ( pressedKeys.includes( DELETION_KEY ) )
-            else if ( currentMode === DELETE_MODE )
-            {
-                console.log('shift down');
-                deleteCircle( clickedCircle );
-            }
-        }        
+        customRespondToCanvas(e);
     });
+    matterCanvas.addEventListener('touchstart', function (e) {
+        customRespondToCanvas(e);
+    });
+}
+
+function customRespondToCanvas( e )
+{
+    console.log( "click at " + e.offsetX + "," + e.offsetY );
+
+    // console.log( render.mouse.button  );
+    // console.log( mouseConstraint.body );
+
+    // if not over a circle, add one
+    if ( mouseConstraint.body == null )
+    {
+        console.log( "add a circle here");
+        addCircle( nextID(), e.offsetX, e.offsetY );
+    }
+    // otherwise, there is a circle being clicked
+    else
+    {
+        clickedCircle = mouseConstraint.body;
+
+        // if we're pinning it
+        // if ( pressedKeys.includes( PINNING_KEY ) )
+        if ( currentMode === PIN_MODE )
+        {
+            console.log( "pin it" );
+            togglePinning( clickedCircle );
+        }
+        // otherwise, if we're selecting it
+        // else if (e.shiftKey)
+        else if ( currentMode === CONNECT_MODE )
+        {
+            console.log('shift down');
+            toggleSelection( clickedCircle );
+        }
+        // otherwise, if we're deleting it
+        // else if ( pressedKeys.includes( DELETION_KEY ) )
+        else if ( currentMode === DELETE_MODE )
+        {
+            console.log('shift down');
+            deleteCircle( clickedCircle );
+        }
+    }        
 }
 
 /** This helps with dragging and with convenience of knowing if mouse is interacting with matter bodies */
