@@ -10,6 +10,7 @@ var Engine = Matter.Engine,
     Mouse = Matter.Mouse,
     Composite = Matter.Composite,
     Bodies = Matter.Bodies;
+    Query = Matter.Query;
 
 // CONSTRAINT CONSTANTS
 var STIFFNESS_CONSTANT = 1;

@@ -72,6 +72,9 @@ function customRespondToCanvas( x, y )
     // console.log( render.mouse.button  );
     // console.log( mouseConstraint.body );
 
+    var bodiesUnder  = Query.point( Composite.allBodies(barAndJointComposite), { x: x, y: y});
+    console.log( bodiesUnder );
+
     // if in ADD_MODE, add one
     if ( currentMode === ADD_MODE )
     {
@@ -79,9 +82,10 @@ function customRespondToCanvas( x, y )
         addCircle( nextID(), x, y );
     }
     // otherwise, there is a circle being clicked
-    else
+    else if ( bodiesUnder.length > 0 )
     {
-        clickedCircle = mouseConstraint.body;
+        // clickedCircle = mouseConstraint.body;
+        var clickedCircle = bodiesUnder[0];
 
         // if we're pinning it
         // if ( pressedKeys.includes( PINNING_KEY ) )
