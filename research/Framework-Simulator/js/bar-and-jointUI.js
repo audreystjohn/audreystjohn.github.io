@@ -1,4 +1,5 @@
 var mouse, mouseConstraint;
+var MOUSE_STIFFNESS = .005; // how "hard" the mouse pulls on the vertex
 var pressedKeys = new Array();
 var PINNING_KEY = "p";
 var DELETION_KEY = "d";
@@ -70,15 +71,15 @@ function customRespondToCanvas( x, y )
 
     var bodiesUnder  = Query.point( Composite.allBodies(barAndJointComposite), { x: x, y: y});
 
-    var statusMsg = "body under (" + x + "," + y + "): " + bodiesUnder[0].graphID;
-    console.log( statusMsg );
+    // var statusMsg = "body under (" + x + "," + y + "): " + bodiesUnder[0].graphID;
+    // console.log( statusMsg );
     
-    document.getElementById('statusText').textContent = "Status: " + statusMsg;
+    // document.getElementById('statusText').textContent = "Status: " + statusMsg;
 
     // if in ADD_MODE, add one
     if ( currentMode === ADD_MODE )
     {
-        console.log( "add a circle here");
+        // console.log( "add a circle here");
         addCircle( nextID(), x, y );
     }
     // otherwise, there is a circle being clicked
@@ -91,21 +92,21 @@ function customRespondToCanvas( x, y )
         // if ( pressedKeys.includes( PINNING_KEY ) )
         if ( currentMode === PIN_MODE )
         {
-            console.log( "pin it" );
+            // console.log( "pin it" );
             togglePinning( clickedCircle );
         }
         // otherwise, if we're selecting it
         // else if (e.shiftKey)
         else if ( currentMode === CONNECT_MODE )
         {
-            console.log('shift down');
+            // console.log('shift down');
             toggleSelection( clickedCircle );
         }
         // otherwise, if we're deleting it
         // else if ( pressedKeys.includes( DELETION_KEY ) )
         else if ( currentMode === DELETE_MODE )
         {
-            console.log('shift down');
+            // console.log('shift down');
             deleteCircle( clickedCircle );
         }
     }        
@@ -114,14 +115,15 @@ function customRespondToCanvas( x, y )
 /** This helps with dragging and with convenience of knowing if mouse is interacting with matter bodies */
 function setupMouseConstraint()
 {
-    mouseConstraint = CustomMouseConstraint.create(engine, {
+    mouseConstraint = MouseConstraint.create(engine, {
             mouse: mouse,
             constraint: {
                 // allow bodies on mouse to rotate
                 angularStiffness: 0,
-                render: {
-                    visible: false
-                }
+                stiffness: MOUSE_STIFFNESS,
+                // render: {
+                //     visible: false
+                // }
             }
         });
 
@@ -249,7 +251,7 @@ function setupIconElts()
 
 function clickIcon(anchor) {
     var clickedIconId = anchor.querySelector("i").id;
-    console.log( "clicked on " + clickedIconId );
+    // console.log( "clicked on " + clickedIconId );
 
     // id has "Icon" at the end, so strip off last 4 characters
     setMode( clickedIconId.substring( 0, clickedIconId.length - 4 ) );

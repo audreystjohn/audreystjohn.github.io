@@ -6,14 +6,14 @@ var Engine = Matter.Engine,
     Composites = Matter.Composites,
     Common = Matter.Common,
     Constraint = Matter.Constraint,
-    // MouseConstraint = Matter.MouseConstraint,
+    MouseConstraint = Matter.MouseConstraint,
     Mouse = Matter.Mouse,
     Composite = Matter.Composite,
     Bodies = Matter.Bodies;
     Query = Matter.Query;
 
 // CONSTRAINT CONSTANTS
-var STIFFNESS_CONSTANT = 1;
+var STIFFNESS_CONSTANT = .9;
 
 // DISPLAY CONSTANTS
 var CIRCLE_FILL_COLOR = "#03a9fc"; // blue
