@@ -74,7 +74,7 @@ function customRespondToCanvas( x, y )
     if ( mouseConstraint.body == null )
     {
         console.log( "add a circle here");
-        addCircle( nextID(), x, y );
+        // addCircle( nextID(), x, y );
     }
     // otherwise, there is a circle being clicked
     else
