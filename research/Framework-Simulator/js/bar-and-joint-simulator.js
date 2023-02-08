@@ -10,6 +10,7 @@ var Engine = Matter.Engine,
     Mouse = Matter.Mouse,
     Composite = Matter.Composite,
     Bodies = Matter.Bodies;
+    Body = Matter.Body;
     Query = Matter.Query;
 
 // CONSTRAINT CONSTANTS
@@ -33,6 +34,8 @@ var engine, world, render;
 var idToCircleMap;
 var barAndJointComposite;
 
+var sandbox_width = 800; // FOR SOME REASON, any other value messes up the click coordinates
+var sandbox_height = 400; // this one is cool... no matter what you put in ...
 
 function setup()
 {
@@ -52,8 +55,8 @@ function setup()
         canvas: matterCanvas,
         engine: engine,
         options: {
-            width: 800,
-            height: 600,
+            width: sandbox_width,
+            height: sandbox_height,
             showAngleIndicator: true,
             wireframes: false,
             background: "transparent",
@@ -73,7 +76,7 @@ function setup()
     // fit the render viewport to the scene
     Render.lookAt(render, {
         min: { x: 0, y: 0 },
-        max: { x: 800, y: 600 }
+        max: { x: matterCanvas.width, y: matterCanvas.height }
     });
 
     // run the renderer
@@ -107,10 +110,10 @@ function addWalls()
 {
     Composite.add(world, [
         // walls
-        Bodies.rectangle(400, 0, 800, 20, { isStatic: true, render:{fillStyle: WALL_FILL_COLOR } }),
-        Bodies.rectangle(400, 600, 800, 20, { isStatic: true, render:{fillStyle: WALL_FILL_COLOR } }),
-        Bodies.rectangle(800, 300, 20, 600, { isStatic: true, render:{fillStyle: WALL_FILL_COLOR } }),
-        Bodies.rectangle(0, 300, 20, 600, { isStatic: true, render:{fillStyle: WALL_FILL_COLOR } })
+        Bodies.rectangle(sandbox_width/2, 0, sandbox_width, 20, { isStatic: true, render:{fillStyle: WALL_FILL_COLOR } }),
+        Bodies.rectangle(sandbox_width/2, sandbox_height, sandbox_width, 20, { isStatic: true, render:{fillStyle: WALL_FILL_COLOR } }),
+        Bodies.rectangle(sandbox_width, sandbox_height/2, 20, sandbox_height, { isStatic: true, render:{fillStyle: WALL_FILL_COLOR } }),
+        Bodies.rectangle(0, sandbox_height/2, 20, sandbox_height, { isStatic: true, render:{fillStyle: WALL_FILL_COLOR } })
     ]);
 }
 
@@ -118,14 +121,14 @@ function addWalls()
  * Add a circle to the world using the id (which should correspond to vertex id)
  * at coordinates (x,y)
  */
-function addCircle( id, x, y )
+function addCircle( id, x, y, pinned=false )
 {
     // create the body
     var ball = Bodies.circle(x, y, 15, 
         {   
             graphID: id, // to track the id from the "graph"
             collisionFilter: { group: -1 },
-            isStatic: false, // not pinned
+            isStatic: false, // start off not pinned 
             render:{
                 fillStyle: CIRCLE_FILL_COLOR,
                 lineWidth: CIRCLE_LINE_WIDTH,
@@ -137,11 +140,13 @@ function addCircle( id, x, y )
             } 
         });   
 
+    if ( pinned )
+        togglePinning( ball );
+
     // keep track of it through the id map
     idToCircleMap.set( id, ball );
 
     // add the body to the world
-    // Composite.add(world, [ball]);
     Composite.add( barAndJointComposite, [ball] );
 }
 
@@ -184,9 +189,61 @@ function addConstraintBetween( id1, id2 )
     }
 }
 
+/**
+ * Move the circle (respecting constraints).
+ */
+function moveCircle( graphID, updatedX, updatedY )
+{
+    // changing a body's position in Matter JS maintains the constraints
+    var circleBody = idToCircleMap.get( graphID );
+    Body.setPosition( circleBody, {x:updatedX, y:updatedY});
+}
+
+
+/**
+ * Change the position of the circle and update relevant constraint values.
+ */
+function setPosition( graphID, updatedX, updatedY )
+{
+    console.log( `moving ${graphID} to ${updatedX}, ${updatedY}`);
+
+    // changing a body's position in Matter JS maintains the constraints
+    // we will remove all the constraints, move the body, then put the constraints back in
+    var circleBody = idToCircleMap.get( graphID );
+
+    // track neighbors 
+    var neighbors = new Array();
+    var currentConstraints = Composite.allConstraints(barAndJointComposite);
+    var currentConstraint;
+
+    // iterate over all constraints
+    // if find a neighbor, remove the constraint and track the graphID to add back in
+    for ( var i = 0; i < currentConstraints.length; i++ )
+    {
+        currentConstraint = currentConstraints[i];
+        if ( currentConstraint.bodyA == circleBody )
+        {
+            neighbors.push( currentConstraint.bodyB.graphID );
+            Composite.remove( barAndJointComposite, currentConstraint );        
+        }
+        else if ( currentConstraint.bodyB == circleBody )
+        {
+            neighbors.push( currentConstraint.bodyA.graphID );
+            Composite.remove( barAndJointComposite, currentConstraint );        
+        }
+    }
+    Body.setPosition( circleBody, {x:updatedX, y:updatedY});
+
+    // now add the constraints back in
+    for ( var i = 0; i < neighbors.length; i++ )
+        addConstraintBetween( graphID, neighbors[i] );
+    console.log( circleBody );
+}
+
 function deleteCircle( circleBody )
 {
     var currentConstraints = Composite.allConstraints(barAndJointComposite);
+    var currentConstraint;
     for ( var i = 0; i < currentConstraints.length; i++ )
     {
         currentConstraint = currentConstraints[i];

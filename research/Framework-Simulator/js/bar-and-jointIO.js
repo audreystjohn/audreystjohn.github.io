@@ -23,7 +23,10 @@ function addBarAndJointToWorldFromCytoscapeObj( graphObj, clearFirst = true )
   {
     console.log( graphObj.nodes[i] );
     node = graphObj.nodes[i];
-    addCircle( node.data.id, Number(node.data.x), Number(node.data.y) );
+    if ( "pinned" in node.data )
+      addCircle( node.data.id, Number(node.data.x), Number(node.data.y), eval(node.data.pinned) );
+    else
+      addCircle( node.data.id, Number(node.data.x), Number(node.data.y) );
   }
 
   // iterate over the edges to add constraints between the (assumed to be existing)
@@ -48,10 +51,16 @@ function frameworkToJSON()
   var bodies = Composite.allBodies( barAndJointComposite );
   for ( var i = 0; i < bodies.length; i++ )
   {
-    cytograph.nodes.push( { data: { id: bodies[i].graphID,
-                                     x: bodies[i].position.x,
-                                     y: bodies[i].position.y } } );
-  }
+    if ( bodies[i].isStatic )
+      cytograph.nodes.push( {data:{ id: bodies[i].graphID,
+                              x: bodies[i].position.x,
+                              y: bodies[i].position.y,
+                              pinned: bodies[i].isStatic }} );
+    else
+      cytograph.nodes.push( {data:{ id: bodies[i].graphID,
+                              x: bodies[i].position.x,
+                              y: bodies[i].position.y }} );
+}
 
   // get the constraints -> edges
   var constraints = Composite.allConstraints( barAndJointComposite );
