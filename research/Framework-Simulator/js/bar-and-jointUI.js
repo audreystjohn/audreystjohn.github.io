@@ -87,12 +87,6 @@ function customRespondToCanvas( eventType, x, y )
 {
     var bodiesUnder  = Query.point( Composite.allBodies(barAndJointComposite), { x: x, y: y });
 
-    // if ( !mouseIsDown )
-    //     return;
-
-    // console.log( `customRespondToCanvas ( ${x},${y} ): ${bodiesUnder}`);
-    // console.log( "body under (" + x + "," + y + "): " + bodiesUnder[0].graphID );
-
     // we will track what was selected 
     if ( eventType === 'down' )
     {
