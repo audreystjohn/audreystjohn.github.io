@@ -74,18 +74,35 @@ function setupCustomCanvasEvents()
         // matterCanvas.addEventListener('click', function (e) {
             customRespondToCanvas('move', e.offsetX, e.offsetY);
     });
+
     matterCanvas.addEventListener('touchstart', function (e) {
         var touch = e.touches[0];
         var canvas = document.getElementById( 'matterJS-canvas' );
         var x = touch.pageX - canvas.offsetLeft;
         var y = touch.pageY - canvas.offsetTop;
-        customRespondToCanvas(x,y);
+        customRespondToCanvas("down",x,y);
+    });
+
+    matterCanvas.addEventListener('touchend', function (e) {
+        var touch = e.changedTouches[0];
+        var canvas = document.getElementById( 'matterJS-canvas' );
+        var x = touch.pageX - canvas.offsetLeft;
+        var y = touch.pageY - canvas.offsetTop;
+        customRespondToCanvas("up",x,y);
+    });
+
+    matterCanvas.addEventListener('touchmove', function (e) {
+        var touch = e.touches[0];
+        var canvas = document.getElementById( 'matterJS-canvas' );
+        var x = touch.pageX - canvas.offsetLeft;
+        var y = touch.pageY - canvas.offsetTop;
+        customRespondToCanvas("move",x,y);
     });
 }
 
 function customRespondToCanvas( eventType, x, y )
 {
-    var bodiesUnder  = Query.point( Composite.allBodies(barAndJointComposite), { x: x, y: y });
+    var bodiesUnder = Query.point( Composite.allBodies(barAndJointComposite), { x: x, y: y });
 
     // we will track what was selected 
     if ( eventType === 'down' )
