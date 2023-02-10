@@ -318,18 +318,18 @@ function inputFramework() {
 
 function loadFile() {
     console.log( "in loadFile" );
-      const content = document.querySelector('.content');
-      const [file] = document.querySelector('input[type=file]').files;
-      const reader = new FileReader();
-  
-      reader.addEventListener("load", () => {
-          // this will then display a text file
-          console.log(reader.result);
-            document.getElementById('jsonArea').textContent = reader.result;
-          addBarAndJointToWorldFromJSON( reader.result );
-      }, false);
-  
-      if (file) {
-        reader.readAsText(file);
-      }
-  } 
+    const content = document.querySelector('.content');
+    const [file] = document.querySelector('input[type=file]').files;
+    const reader = new FileReader();
+
+    reader.addEventListener("load", () => {
+        // this will then display a text file
+        console.log(reader.result);
+        document.getElementById('jsonArea').textContent = reader.result;
+        addBarAndJointToWorldFromJSON( reader.result );
+    }, false);
+
+    if (file) {
+    reader.readAsText(file);
+    }
+} 

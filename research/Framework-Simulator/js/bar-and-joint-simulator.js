@@ -258,8 +258,11 @@ function nextID()
     var graphIDs = Array.from( idToCircleMap.keys() );
     var maxLabel = maxValue( graphIDs );
 
+    // if there are no vertices
+    if ( maxLabel == null )
+        return "a";
     // check if we are using numbers 
-    if (  /^\d+$/.test(maxLabel) )
+    else if (  /^\d+$/.test(maxLabel) )
         return (Number(maxLabel) + 1).toString();
     else 
     {

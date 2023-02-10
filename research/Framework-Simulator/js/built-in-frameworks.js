@@ -1,7 +1,7 @@
 var builtInFrameworks = new Map();
 const requestURLBase = "http://minerva.cs.mtholyoke.edu/research/Framework-Simulator/json/";
 var BUILT_IN_FILES = new Map([
-    ["Triangle", "triangle"], 
+    ["Triangle", "triangle"],
     ["Four bar", "fourBar"]
     ]);
 
@@ -25,7 +25,9 @@ function addBuiltInFramework( label, jsonObj )
     var option = document.createElement('option');
     option.text = label;
     option.value = label;
+    console.log( `adding built in framework ${label}`);
     select.add(option);
+    console.log( `now there are ${select.length} options`);
 
     labelToGraphObj.set( label, jsonObj );
 }
@@ -34,6 +36,8 @@ function loadBuiltIn()
 {
     var select = document.getElementById("Frameworks");
     var retrievedGraph = labelToGraphObj.get( select.value  );
+    console.log( `selecting from ${select.length} options`);
+
     addBarAndJointToWorldFromCytoscapeObj( retrievedGraph );
 }
 
