@@ -2,7 +2,8 @@ var builtInFrameworks = new Map();
 const requestURLBase = "http://minerva.cs.mtholyoke.edu/research/Framework-Simulator/json/";
 var BUILT_IN_FILES = new Map([
     ["Triangle", "triangle"],
-    ["Four bar", "fourBar"]
+    ["Four bar", "fourBar"],
+    ["Desargues (special position)", "specialDesargues"]
     ]);
 
 var labelToGraphObj = new Map();
