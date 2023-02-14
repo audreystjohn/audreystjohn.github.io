@@ -59,6 +59,7 @@ function initUI()
     setMode( currentMode );
 
     setupBuiltIns();
+    initFramework();
 }
 
 function setupCustomCanvasEvents()

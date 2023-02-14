@@ -8,6 +8,28 @@ var BUILT_IN_FILES = new Map([
 
 var labelToGraphObj = new Map();
 
+function initFramework()
+{
+
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const frameworkName = urlParams.get('framework');
+
+    console.log(frameworkName);
+
+    if ( typeof frameworkName === "undefined" )
+    {
+        console.log( "no framework");
+        loadTriangle();
+        loadFourBar( false );
+    }
+    else
+    {
+        initDefaultFramework( frameworkName );
+    }
+
+}
+
 async function setupBuiltIns()
 {
     for (let [key, value] of BUILT_IN_FILES) 
@@ -40,6 +62,20 @@ function loadBuiltIn()
     console.log( `selecting from ${select.length} options`);
 
     addBarAndJointToWorldFromCytoscapeObj( retrievedGraph );
+}
+
+// e.g. "http://minerva.cs.mtholyoke.edu/research/Framework-Simulator/json/triangle.json"
+async function initDefaultFramework( frameworkURL )
+{
+    const request = new Request( frameworkURL );
+    const response = await fetch(request);
+    const jsonObj = await response.json();
+    
+    // addBuiltInFramework( key,jsonObj);
+    // var retrievedGraph = labelToGraphObj.get( select.value  );
+    // console.log( `selecting from ${select.length} options`);
+
+    addBarAndJointToWorldFromCytoscapeObj( jsonObj );
 }
 
 /******* BUILT IN FRAMEWORKS  **********/
