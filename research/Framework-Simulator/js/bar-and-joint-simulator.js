@@ -71,7 +71,6 @@ function setup()
     // Runner.run(runner, engine);
 
     addWalls();
-    initUI();
 
     // fit the render viewport to the scene
     Render.lookAt(render, {
@@ -89,6 +88,9 @@ function setup()
     Runner.run(runner, engine);
 
     initDataSets();
+
+    initUI();
+
 }
 
 function initDataSets()

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<html lang="en">
+  <head>
+    <!-- <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script> -->
+
+    <script src="js/matter.min.js"></script>
+    <script src="js/custom-render.js"></script>
+    <script src="js/bar-and-jointIO.js"></script>
+    <script src="js/built-in-frameworks.js"></script>
+    <script src="js/bar-and-jointUI.js"></script>
+    <script src="js/bar-and-joint-simulator.js"></script>
+    <script src="js/sandbox.js"></script>
+
+    <title>Bar-and-joint simulator</title>
+
+    <link rel="stylesheet" href="css/bar-and-joint-styles.css">
+    <link rel="stylesheet" href="css/icon-styles.css">
+  </head>
+  <body>
+    <div class="tooltip">
+      <a onclick="clickIcon(this)"><i class="gg-move" id="moveIcon"></i></a>
+      <span class="tooltip-content hidden">Move mode</span>
+    </div>
+    <div class="tooltip">
+      <a onclick="clickIcon(this)"><i class="gg-pin-alt" id="pinIcon"></i></a>
+      <span class="tooltip-content hidden">Pin mode</span>
+    </div>
+    <div class="tooltip">
+      <a onclick="clickIcon(this)"><i class="gg-attribution" id="connectIcon"></i></a>
+      <span class="tooltip-content hidden">Connect mode</span>
+    </div>
+    <div class="tooltip no-pad">
+      <a onclick="clickIcon(this)"><i class="gg-add" id="addIcon"></i></a>
+      <span class="tooltip-content hidden">Add mode</span>
+    </div>
+    <div class="tooltip">
+      <a onclick="clickIcon(this)"><i class="gg-assign" id="editIcon"></i></a>
+      <span class="tooltip-content hidden">Edit mode</span>
+    </div>
+    <div class="tooltip">
+      <a onclick="clickIcon(this)"><i class="gg-erase" id="deleteIcon"></i></a>
+      <span class="tooltip-content hidden">Erase mode</span>
+    </div>
+    <div class="tooltip no-pad">
+      <a onclick="outputFramework()"><i class="gg-printer" id="saveIcon"></i></a>
+      <span class="tooltip-content hidden">Print framework below</span>
+    </div>
+    <div class="tooltip">
+      <a onclick="clearFramework()"><i class="gg-trash" id="clearIcon"></i></a>
+      <span class="tooltip-content hidden">Clear framework</span>
+    </div>
+    </span>
+    <span style="color:green">
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Current mode: <i><span id="modeLabel">drag</span></i></span>
+    <br/>
+    
+    <canvas id = "matterJS-canvas" ></canvas>
+    <script src="js/main.js"></script>
+    
+
+  </body>
+</html>

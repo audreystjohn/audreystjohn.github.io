@@ -10,14 +10,13 @@ var labelToGraphObj = new Map();
 
 function initFramework()
 {
-
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const frameworkName = urlParams.get('framework');
 
     console.log(frameworkName);
 
-    if ( typeof frameworkName === "undefined" )
+    if ( frameworkName == null )
     {
         console.log( "no framework");
         loadTriangle();

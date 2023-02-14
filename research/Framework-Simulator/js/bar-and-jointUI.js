@@ -58,7 +58,8 @@ function initUI()
 
     setMode( currentMode );
 
-    setupBuiltIns();
+    if ( document.getElementById("Frameworks") != null )
+        setupBuiltIns();
     initFramework();
 }
 
