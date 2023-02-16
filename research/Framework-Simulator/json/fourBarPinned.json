@@ -1,0 +1,60 @@
+{
+    "nodes": [
+        {
+            "data": {
+                "id": "a",
+                "x": "400",
+                "y": "100",
+                "pinned": true
+            }
+        },
+        {
+            "data": {
+                "id": "b",
+                "x": "500",
+                "y": "100",
+                "pinned": true
+            }
+        },
+        {
+            "data": {
+                "id": "c",
+                "x": "550",
+                "y": "150"
+            }
+        },
+        {
+            "data": {
+                "id": "d",
+                "x": "500",
+                "y": "150"
+            }
+        }
+    ],
+    "edges": [
+    {
+      "data": {
+        "source": "a",
+        "target": "b"
+      }
+    },
+    {
+      "data": {
+        "source": "b",
+        "target": "c"
+      }
+    },
+    {
+      "data": {
+        "source": "c",
+        "target": "d"
+      }
+    },
+    {
+      "data": {
+        "source": "d",
+        "target": "a"
+      }
+    }
+    ]
+}

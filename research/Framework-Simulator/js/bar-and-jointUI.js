@@ -30,9 +30,7 @@ var selectedCircle = null; // for connection mode
 var currentMode;
 var previousMode;
 
-
 var mouseIsDown = false;
-
 
 function initUI()
 {
